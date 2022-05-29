@@ -1,12 +1,13 @@
-package transaction_http
+package transaction
 
 import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"time"
-	"transaction"
+
+	transaction "github.com/Kevingtxz/GoLangFinance/model/transaction"
+	"github.com/Kevingtxz/GoLangFinance/util"
 )
 
 func GetTransactions(w http.ResponseWriter, r *http.Request) {
@@ -17,14 +18,12 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	var layout = "2006-01-02T15:04:05"
-	dateCreated, _ := time.Parse(layout, "2022-05-28T10:00:00")
 	var transactions = transaction.Transactions{
 		transaction.Transaction{
 			Title:    "Salário",
 			Amount:   1200.0,
 			Type:     0,
-			CreateAt: dateCreated,
+			CreateAt: util.StringToDate("2022-01-01T01:01:01"),
 		},
 	}
 
